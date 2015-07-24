@@ -19,7 +19,7 @@ module.exports = {
   devtool: 'sourcemap',
   entry: [
       'webpack/hot/only-dev-server',
-      './src/components/<% if (reactRouter) { %>main<% } else { %><%= scriptAppName %><% } %>.js'
+      './src/components/<% if (data.reactRouter) { %>main<% } else { %><%= data.scriptAppName %><% } %>.js'
   ],
 
   stats: {
@@ -32,9 +32,7 @@ module.exports = {
     alias: {
       'styles': __dirname + '/src/styles',
       'mixins': __dirname + '/src/mixins',
-      'components': __dirname + '/src/components/'<% if(architecture==='flux'||architecture=='reflux') { %>,
-      'stores': __dirname + '/src/stores/',
-      'actions': __dirname + '/src/actions/'<% } %>
+      'components': __dirname + '/src/components/'
     }
   },
   module: {
@@ -47,16 +45,16 @@ module.exports = {
       test: /\.(js|jsx)$/,
       exclude: /node_modules/,
       loader: 'react-hot!babel-loader'
-    },<% if (stylesLanguage === 'sass') { %> {
+    },<% if (data.stylesLanguage === 'sass') { %> {
       test: /\.sass/,
       loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded&indentedSyntax'
-    },<% } %><% if (stylesLanguage === 'scss') { %> {
+    },<% } %><% if (data.stylesLanguage === 'scss') { %> {
       test: /\.scss/,
       loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'
-    },<% } %><% if (stylesLanguage === 'less') { %> {
+    },<% } %><% if (data.stylesLanguage === 'less') { %> {
       test: /\.less/,
       loader: 'style-loader!css-loader!less-loader'
-    },<% } %><% if (stylesLanguage === 'stylus') { %> {
+    },<% } %><% if (data.stylesLanguage === 'stylus') { %> {
       test: /\.styl/,
       loader: 'style-loader!css-loader!stylus-loader'
     },<% } %> {
